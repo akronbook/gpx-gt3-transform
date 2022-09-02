@@ -39,7 +39,7 @@ namespace GPX_GT3_Transform
             trackNode.AppendChild(nameNode);
 
             XmlElement typeNode = doc.CreateElement("type");   
-            XmlText typeText = doc.CreateTextNode(track.Type);
+            XmlText typeText = doc.CreateTextNode(String.IsNullOrWhiteSpace(track.Type) ? "Hiking" : track.Type);
             typeNode.AppendChild(typeText);
             trackNode.AppendChild(typeNode);
 
