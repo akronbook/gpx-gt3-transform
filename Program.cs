@@ -47,6 +47,9 @@ namespace GPX_GT3_Transform
             var inputGpxFile = args[0];
             var outputGpxFile = args[1];
             GpxTrack track = readTrack(inputGpxFile, new ProximityTrackPointReader());
+            Console.WriteLine($"Total # of segments={track.Segments.Count}, points={track.Segments[0].TrackPoints.Count}");
+            var writer = new Gt3Writer();
+            writer.Write(track, outputGpxFile);
         }
     }
 }
