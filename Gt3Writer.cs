@@ -62,9 +62,11 @@ namespace GPX_GT3_Transform
                     longAttribute.Value = point.Longitude.Degrees.ToString("0.#####");
                     pointNode.Attributes.Append(longAttribute); 
 
-                    XmlAttribute elevAttribute = doc.CreateAttribute("ele");
-                    elevAttribute.Value = point.Elevation?.ToString("0.#");
-                    pointNode.Attributes.Append(elevAttribute); 
+                    XmlElement elevNode = doc.CreateElement("ele");
+                    XmlText elevationText = doc.CreateTextNode(point.Elevation?.ToString("0.#"));
+                    elevNode.AppendChild(elevationText); 
+                    pointNode.AppendChild(elevNode); 
+                    
                     currentNode = pointNode;
                 }
 
