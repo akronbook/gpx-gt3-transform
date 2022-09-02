@@ -15,7 +15,7 @@ namespace GPX_GT3_Transform
             gpxNode.Attributes.Append(xmlnsAttribute);
 
             XmlAttribute creatorAttribute = doc.CreateAttribute("creator");
-            creatorAttribute.Value = "AllTrails"; // TODO: avoid hard-coding
+            creatorAttribute.Value = track.Source;
             gpxNode.Attributes.Append(creatorAttribute);    
 
             XmlAttribute versionAttribute = doc.CreateAttribute("version");
