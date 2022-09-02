@@ -38,11 +38,13 @@ namespace GPX_GT3_Transform
             nameNode.AppendChild(nameText);
             trackNode.AppendChild(nameNode);
 
+
             XmlElement typeNode = doc.CreateElement("type");   
             XmlText typeText = doc.CreateTextNode(String.IsNullOrWhiteSpace(track.Type) ? "Hiking" : track.Type);
             typeNode.AppendChild(typeText);
             trackNode.AppendChild(typeNode);
 
+            XmlElement? currentNode = null;
             foreach(var segment in track.Segments)
             {
                 XmlElement trackSegmentNode = doc.CreateElement("trkseg"); 
@@ -61,10 +63,16 @@ namespace GPX_GT3_Transform
                     pointNode.Attributes.Append(longAttribute); 
 
                     XmlAttribute elevAttribute = doc.CreateAttribute("ele");
-                    elevAttribute.Value = point.Elevation.ToString();
+                    elevAttribute.Value = point.Elevation?.ToString("0.#");
                     pointNode.Attributes.Append(elevAttribute); 
+                    currentNode = pointNode;
+                }
+
+                if (currentNode != null) {
+                    trackSegmentNode.RemoveChild(currentNode);
                 }
             }
+
 
             doc.AppendChild(gpxNode);
             doc.Save(outputFile);
